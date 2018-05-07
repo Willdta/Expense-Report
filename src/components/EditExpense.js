@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ExpenseForm from './ExpenseForm'
-import { editExpense, removeExpense } from '../actions/expenseActions' 
+import { editExpenseFromFirebase, removeExpenseFromFirebase } from '../actions/expenseActions' 
 
 const EditExpense = (props) => {
   return (
@@ -9,13 +9,13 @@ const EditExpense = (props) => {
       <ExpenseForm 
         expense={props.expense} 
         onSubmit={expense => {
-          props.dispatch(editExpense(props.expense.id, expense))
+          props.dispatch(editExpenseFromFirebase(props.expense.id, expense))
           props.history.push('/')
         }}  
       />
       <button 
         onClick={() => {
-          props.dispatch(removeExpense({ id: props.expense.id }))
+          props.dispatch(removeExpenseFromFirebase({ id: props.expense.id }))
           props.history.push('/')
         }}>
         Remove
