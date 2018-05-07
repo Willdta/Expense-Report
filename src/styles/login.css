@@ -1,0 +1,27 @@
+.layout {
+  background: url('/images/bg.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-layout {
+  background: white;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  width: 15rem;
+  height: 15rem;
+}
+
+.button {
+  background: lightseagreen;
+  border: none;
+  width: 150px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+}
