@@ -6,12 +6,13 @@ export const addExpense = expense => ({
   expense
 })
 
-export const addExpenseToFirebase = (expenseData = {}) => dispatch => {
+export const addExpenseToFirebase = (expenseData = {}) => (dispatch, getState) => {
   const { description, note, amount, createdAt } = expenseData
   const expense = { description, note, amount, createdAt }
-
+  const uid = getState().auth.uid
+  
   database
-    .ref('expenses')
+    .ref(`users/${uid}/expenses`)
     .push(expense)
     .then(ref => {
       dispatch(addExpense({
@@ -27,9 +28,11 @@ export const removeExpense = ({ id } = {}) => ({
   id
 })
 
-export const removeExpenseFromFirebase = ({ id } = {}) => dispatch => {
+export const removeExpenseFromFirebase = ({ id } = {}) => (dispatch, getState) => {
+  const uid = getState().auth.uid  
+
   database
-    .ref(`expenses/${id}`)
+    .ref(`/users/${uid}/expenses/${id}`)
     .remove()
     .then(() => dispatch(removeExpense({ id })))
 }
@@ -41,9 +44,11 @@ export const editExpense = (id, updatedExpense) => ({
   updatedExpense
 })
 
-export const editExpenseFromFirebase = (id, updatedExpense) => dispatch => {
+export const editExpenseFromFirebase = (id, updatedExpense) => (dispatch, getState) => {
+  const uid = getState().auth.uid
+
   database
-    .ref(`expenses/${id}`)
+    .ref(`users/${uid}/expenses/${id}`)    
     .update(updatedExpense)
     .then(() => dispatch(editExpense(id, updatedExpense)))
 }
@@ -54,9 +59,12 @@ export const showExpenseType = expenses => ({
 })
 
 // SHOW_EXPENSE
-export const showExpensesFromFirebase = () => dispatch => {
+export const showExpensesFromFirebase = () => (dispatch, getState) => {
+  const uid = getState().auth.uid
+  
   database
-    .ref('expenses')
+    .ref(`users/${uid}/expenses`)
+    
     .once('value', snapshot => {
       const expenses = []
 
