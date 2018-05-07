@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import AppRouter, { history } from './routers/AppRouter'
 import { firebase } from './firebase/firebase'
 import { checkLogin, checkLogout } from './actions/authActions'
+import Spinner from './components/Spinner'
 
 let hasRendered = false
 
@@ -19,7 +20,6 @@ const renderApp = () => {
   
     hasRendered = true
 }
-
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -38,7 +38,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <h3>loading...</h3>
+   <Spinner />
   </Provider>, 
   document.getElementById('root'))
 registerServiceWorker()
