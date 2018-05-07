@@ -4,16 +4,19 @@ import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import store from './store'
 import { Provider } from 'react-redux'
-import AppRouter, {history} from './routers/AppRouter'
+import AppRouter, { history } from './routers/AppRouter'
 import { firebase } from './firebase/firebase'
-import { showExpensesFromFirebase } from './actions/expenseActions'
 import { checkLogin, checkLogout } from './actions/authActions'
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch(checkLogin(user.uid))
-    store.dispatch(showExpensesFromFirebase())
-     history.push('/dashboard')
+    history.push('/dashboard')
+    ReactDOM.render(
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>,
+      document.getElementById('root'))
   } else {
     console.log('logged out')
     store.dispatch(checkLogout())
@@ -23,7 +26,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppRouter />
+    <h3>loading...</h3>
   </Provider>, 
   document.getElementById('root'))
 registerServiceWorker()

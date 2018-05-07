@@ -5,6 +5,10 @@ import getVisibleExpenses from '../selectors/expenses'
 import { showExpensesFromFirebase } from '../actions/expenseActions'
 
 class ExpenseList extends Component {
+  componentWillMount = () => {
+    this.props.showExpensesFromFirebase()
+  }
+  
   render() {
     const { expenses } = this.props
    
