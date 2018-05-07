@@ -44,24 +44,27 @@ class ExpenseForm extends Component {
   addExpense = e => {
     e.preventDefault()
 
-    if (!this.state.description || !this.state.amount) {
-      this.setState({ errors: 'Please fill in the required fields' })
+    if (!this.state.description) {
+      this.setState({ errors: 'Please enter a description' })
+    } else if (!this.state.amount) {
+      this.setState({ errors: 'Please enter an amount' })
+    } else if (!this.state.description && !this.state.amount) {
+      this.setState({ errors: 'Please enter a description and amount' })
     } else {
       this.setState({ errors: null })
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note,
+      })
     }
-
-    this.props.onSubmit({
-      description: this.state.description,
-      amount: parseFloat(this.state.amount, 10) * 100,
-      createdAt: this.state.createdAt.valueOf(),
-      note: this.state.note,
-    })
   }
 
   render() {
     return (
       <div className="form-wrapper">
-        {this.state.errors && <h1>{this.state.errors}</h1>}
+        {this.state.errors && <h1 style={{'textAlign': 'center'}} >{this.state.errors}</h1>}
         <form className="form" onSubmit={this.addExpense}>
           <input 
             className="form-input"
@@ -73,7 +76,6 @@ class ExpenseForm extends Component {
           />
           <input 
             className="form-input"
-          
             type="text" 
             placeholder="amount"
             value={this.state.amount}
@@ -89,7 +91,6 @@ class ExpenseForm extends Component {
           />
           <textarea 
             className="form-input"
-          
             type="text" 
             placeholder="Additional expense info (optional)"
             value={this.state.note}
