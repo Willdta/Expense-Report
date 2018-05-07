@@ -1,23 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ExpenseListItem from './ExpenseListItem'
 import getVisibleExpenses from '../selectors/expenses'
+import { showExpensesFromFirebase } from '../actions/expenseActions'
 
-const ExpenseList = ({ expenses, dispatch }) => (
-  <div>
-    {expenses.map(expense => (
-      <ExpenseListItem 
-        key={expense.id} 
-        {...expense}
-      />
-    ))}
-  </div>
-)
-
-const mapStateToProps = (state) => {
-  return { 
-    expenses: getVisibleExpenses(state.expenses, state.filters) 
+class ExpenseList extends Component {
+  componentDidMount = () => {
+    this.props.showExpensesFromFirebase()
+  }
+  
+  render() {
+    const { expenses } = this.props
+   
+    return (
+      <div>
+        {expenses.map(expense => (
+          <ExpenseListItem
+            key={expense.id}
+            {...expense}
+          />
+        ))}
+      </div>
+    )
   }
 }
 
-export default connect(mapStateToProps)(ExpenseList)
+
+const mapStateToProps = ({ expenses, filters }) => {
+  return { 
+    expenses: getVisibleExpenses(expenses, filters) 
+  }
+}
+
+export default connect(mapStateToProps, { showExpensesFromFirebase })(ExpenseList)

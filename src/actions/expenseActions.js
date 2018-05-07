@@ -33,3 +33,26 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 })
+
+export const showExpenseType = expenses => ({
+  type: 'SHOW_EXPENSES',
+  expenses
+})
+
+// SHOW_EXPENSE
+export const showExpensesFromFirebase = () => dispatch => {
+  database
+    .ref('expenses')
+    .once('value', snapshot => {
+      const expenses = []
+
+      snapshot.forEach(child => {
+        expenses.push({
+          id: child.key,
+          ...child.val()
+        })
+      })
+
+    dispatch(showExpenseType(expenses))
+  })
+}
