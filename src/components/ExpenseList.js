@@ -5,26 +5,38 @@ import getVisibleExpenses from '../selectors/expenses'
 import { showExpensesFromFirebase } from '../actions/expenseActions'
 
 class ExpenseList extends Component {
-  componentWillMount = () => {
+  state = {
+    loading: false
+  }
+
+  componentDidMount = () => {
     this.props.showExpensesFromFirebase()
+    this.setState({ loading: true })
   }
   
   render() {
     const { expenses } = this.props
-   
+
     const checkExpense = () => {
-      return expenses.length === 0 ? (
-        <h1 style={{ 'color': 'white', 'textAlign': 'center' }}>No Expenses</h1>
-      ) : (
-        <div>
-          {expenses.map(expense => (
-            <ExpenseListItem
-              key={expense.id}
-              {...expense}
-            />
-          ))}
-        </div>
-      )
+      if (this.state.loading === true) {
+        setTimeout(() => {
+          this.setState({loading: false})
+        }, 200)
+        return <h1 style={{ 'color': 'white', 'textAlign': 'center' }}>Loading..</h1>        
+      } else if (expenses.length === 0) {
+        return <h1 style={{ 'color': 'white', 'textAlign': 'center' }}>No Expenses</h1>
+       } else if (expenses) {
+        return (
+          <div>
+            {expenses.map(expense => (
+              <ExpenseListItem
+                key={expense.id}
+                {...expense}
+              />
+            ))}
+          </div>
+        )
+      }
     }
 
     return checkExpense()
