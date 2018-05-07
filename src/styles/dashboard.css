@@ -1,0 +1,44 @@
+.expense-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 50px; */
+}
+
+.expense-filter-wrapper {
+  /* background: red; */
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.expense-list-wrapper {
+  margin-top: 100px;
+  border: 1px solid black;
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.filter-items {
+  padding: 0 10px;
+}
+
+.filter-input {
+  height: 46px;
+  width: 200px;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-input::placeholder {
+  padding-left: 10px;
+}
+
+.filter-select {
+  margin: 0 50px;
+  height: 50px;
+  width: 200px;
+}

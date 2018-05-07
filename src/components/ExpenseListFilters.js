@@ -17,14 +17,17 @@ class ExpenseListFilters extends Component {
     const { filters, dispatch } = this.props
 
     return (
-      <div>
+      <div className="filter-items">
         <input
+          className="filter-input"
           type="text"
+          placeholder="Search for an expense"
           value={filters.text}
           onChange={e => dispatch(setTextFilter(e.target.value))}
         />
 
         <select
+          className="filter-select"
           value={filters.sortBy}
           onChange={e => {
             if (e.target.value === 'date') {
