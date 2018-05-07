@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import store from './store'
-
 import { Provider } from 'react-redux'
-
 import AppRouter from './routers/AppRouter'
-import configureStore from './reducers/index'
+import { firebase } from './firebase/firebase'
 
-import { addExpense } from './actions/expenseActions'
-
-// const store = configureStore()
-
-store.dispatch(addExpense({ description: 'fruit bill', amount: 400, createdAt: 500 }))
-store.dispatch(addExpense({ description: 'baseball bill', amount: 1000, createdAt: 100 }))
-store.dispatch(addExpense({ description: 'gym bill', amount: 4000, createdAt: 1000 }))
-
-console.log(store.getState());
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    console.log('logged in');
+    
+  } else {
+    console.log('logged out');
+    
+  }
+})
 
 ReactDOM.render(
   <Provider store={store}>
