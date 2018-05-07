@@ -2,9 +2,9 @@ import React from 'react'
 import ExpenseList from './ExpenseList'
 import ExpenseListFilters from './ExpenseListFilters'
 
-const Dashboard = (props) => (
+const Dashboard = () => (
   <div>
-    <ExpenseList history={props.history} />
+    <ExpenseList />
     <ExpenseListFilters />
   </div>
 )

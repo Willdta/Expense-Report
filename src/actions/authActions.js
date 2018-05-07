@@ -5,5 +5,14 @@ export const loginUser = () => dispatch => {
 }
 
 export const logoutUser = () => dispatch => {
-  firebase.auth().signOut()
+   firebase.auth().signOut()
 }
+
+export const checkLogin = uid => ({
+  type: 'CHECK_LOGIN',
+  uid
+}) 
+
+export const checkLogout = () => ({
+  type: 'CHECK_LOGOUT'
+})

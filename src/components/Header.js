@@ -7,7 +7,7 @@ const Header = ({ logoutUser }) => (
   <header>
     <NavLink to="/dashboard">Dashboard</NavLink>
     <NavLink to="/add-expense">Add Expense</NavLink>
-    <button onClick={logoutUser}>Logout</button>
+    <button onClick={() => logoutUser()}>Logout</button>
   </header>
 )
 
