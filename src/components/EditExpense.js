@@ -10,13 +10,13 @@ const EditExpense = (props) => {
         expense={props.expense} 
         onSubmit={expense => {
           props.dispatch(editExpenseFromFirebase(props.expense.id, expense))
-          props.history.push('/')
+          props.history.push('/dashboard')
         }}  
       />
       <button 
         onClick={() => {
           props.dispatch(removeExpenseFromFirebase({ id: props.expense.id }))
-          props.history.push('/')
+          props.history.push('/dashboard')
         }}>
         Remove
       </button>      

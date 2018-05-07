@@ -5,7 +5,7 @@ import { logoutUser } from '../actions/authActions'
 
 const Header = ({ logoutUser }) => (
   <header>
-    <NavLink to="/">Home</NavLink>
+    <NavLink to="/dashboard">Dashboard</NavLink>
     <NavLink to="/add-expense">Add Expense</NavLink>
     <button onClick={logoutUser}>Logout</button>
   </header>
