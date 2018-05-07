@@ -8,19 +8,31 @@ import AppRouter, { history } from './routers/AppRouter'
 import { firebase } from './firebase/firebase'
 import { checkLogin, checkLogout } from './actions/authActions'
 
+let hasRendered = false
+
+const renderApp = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>,
+    document.getElementById('root'))
+  
+    hasRendered = true
+}
+
+
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch(checkLogin(user.uid))
     history.push('/dashboard')
-    ReactDOM.render(
-      <Provider store={store}>
-        <AppRouter />
-      </Provider>,
-      document.getElementById('root'))
+    if (!hasRendered) {
+      renderApp()
+    }
   } else {
     console.log('logged out')
     store.dispatch(checkLogout())
     history.push('/')
+    renderApp()
   }
 })
 
