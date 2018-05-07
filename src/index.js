@@ -18,7 +18,7 @@ const renderApp = () => {
     </Provider>,
     document.getElementById('root'))
   
-    hasRendered = true
+   hasRendered = true
 }
 
 firebase.auth().onAuthStateChanged(user => {
@@ -29,7 +29,6 @@ firebase.auth().onAuthStateChanged(user => {
       renderApp()
     }
   } else {
-    console.log('logged out')
     store.dispatch(checkLogout())
     history.push('/')
     renderApp()
