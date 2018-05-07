@@ -31,19 +31,21 @@ export const removeExpenseFromFirebase = ({ id } = {}) => dispatch => {
   database
     .ref(`expenses/${id}`)
     .remove()
+    .then(() => dispatch(removeExpense({ id })))
 }
 
 // EDIT_EXPENSE
-export const editExpense = (id, updates) => ({
+export const editExpense = (id, updatedExpense) => ({
   type: 'EDIT_EXPENSE',
   id,
-  updates
+  updatedExpense
 })
 
 export const editExpenseFromFirebase = (id, updatedExpense) => dispatch => {
   database
     .ref(`expenses/${id}`)
-    .set(updatedExpense)
+    .update(updatedExpense)
+    .then(() => dispatch(editExpense(id, updatedExpense)))
 }
 
 export const showExpenseType = expenses => ({

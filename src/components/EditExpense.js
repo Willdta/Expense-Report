@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 import ExpenseForm from './ExpenseForm'
 import { editExpenseFromFirebase, removeExpenseFromFirebase } from '../actions/expenseActions' 
 
-const EditExpense = (props) => {
+const EditExpense = ({ editExpenseFromFirebase, removeExpenseFromFirebase, ...props }) => {
   return (
     <div>
       <ExpenseForm 
         expense={props.expense} 
         onSubmit={expense => {
-          props.dispatch(editExpenseFromFirebase(props.expense.id, expense))
+          editExpenseFromFirebase(props.expense.id, expense)
           props.history.push('/dashboard')
         }}  
       />
       <button 
         onClick={() => {
-          props.dispatch(removeExpenseFromFirebase({ id: props.expense.id }))
-          props.history.push('/dashboard')
+          removeExpenseFromFirebase({ id: props.expense.id })
+         props.history.push('/dashboard')
         }}>
         Remove
       </button>      
@@ -30,4 +30,4 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export default connect(mapStateToProps)(EditExpense)
+export default connect(mapStateToProps, { editExpenseFromFirebase, removeExpenseFromFirebase })(EditExpense)

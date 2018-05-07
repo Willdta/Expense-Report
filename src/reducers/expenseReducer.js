@@ -16,7 +16,7 @@ export default (state = expensesReducerDefaultState, action) => {
         if (expense.id === action.id) {
           return {
             ...expense,
-            ...action.updates
+            ...action.updatedExpense
           }
         } else {
           return expense;

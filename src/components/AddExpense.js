@@ -9,7 +9,7 @@ const AddExpense = props => (
     <ExpenseForm 
       onSubmit={expense => {
         props.addExpenseToFirebase(expense)
-        props.history.push('/')
+        props.history.push('/dashboard')
       }}
     />
   </div>
