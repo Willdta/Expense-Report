@@ -14,6 +14,7 @@ const EditExpense = ({ editExpenseFromFirebase, removeExpenseFromFirebase, ...pr
         }}  
       />
       <button 
+        className="remove-button"
         onClick={() => {
           removeExpenseFromFirebase({ id: props.expense.id })
          props.history.push('/dashboard')

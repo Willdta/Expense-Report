@@ -5,7 +5,7 @@ import ExpenseForm from './ExpenseForm'
 
 const AddExpense = props => (
   <div>
-    <h1>Add Expense</h1>
+    <h1 style={{ 'textAlign': 'center' }}>Add Expense</h1>
     <ExpenseForm 
       onSubmit={expense => {
         props.addExpenseToFirebase(expense)

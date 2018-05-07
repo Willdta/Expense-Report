@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
+import '../styles/expenseForm.css'
 
 class ExpenseForm extends Component {
   constructor(props) {
@@ -59,10 +60,11 @@ class ExpenseForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form-wrapper">
         {this.state.errors && <h1>{this.state.errors}</h1>}
-        <form onSubmit={this.addExpense}>
+        <form className="form" onSubmit={this.addExpense}>
           <input 
+            className="form-input"
             type="text" 
             placeholder="description"
             value={this.state.description}
@@ -70,6 +72,8 @@ class ExpenseForm extends Component {
             onChange={this.onChange} 
           />
           <input 
+            className="form-input"
+          
             type="text" 
             placeholder="amount"
             value={this.state.amount}
@@ -84,13 +88,15 @@ class ExpenseForm extends Component {
             isOutsideRange={() => false}
           />
           <textarea 
+            className="form-input"
+          
             type="text" 
             placeholder="Additional expense info (optional)"
             value={this.state.note}
             name="note"
             onChange={this.onChange}    
           />
-          <button type="submit">Submit Expense</button>
+          <button className="form-button" type="submit">Submit Expense</button>
         </form>
       </div>
     )

@@ -1,0 +1,39 @@
+.form-wrapper {
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 40vh;
+  flex-direction: column;
+}
+
+.form-input {
+  height: 40px;
+  width: 400px;
+  margin: 10px 0;
+}
+
+.form-button {
+  background: lightseagreen;
+  color: white;
+  height: 40px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+}
+
+.remove-button {
+  background: lightcoral;
+  color: white;
+  height: 40px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -50%
+}
